@@ -25,7 +25,7 @@ window.onload=function()
 		
 		//画小鸟
 		a+=0.04;
-		b+=0.0001;
+		//b+=0.0001;
 		bird.y+=a*a;
 		var birdtu=new Image();
 		birdtu.src="images/bird2_2.png";
@@ -41,17 +41,17 @@ window.onload=function()
 		for(var i=0;i<guandao.length;i++)
 		{
 			var zhuzi=guandao[i];
-			zhuzi.top.x-=b*b;
-			console.log(guandao[0].top.x)
-			zhuzi.bottom.x-=b*b;
-			if(guandao[0].top.x<=100)
+			zhuzi.top.x-=b;
+			//console.log(guandao[0].top.x)
+			zhuzi.bottom.x-=b;
+			if(guandao[0].top.x<=95.5)
 			{
-				num=1;
+				num+=1;
 				shuzi.innerHTML=num;
 			}
-			if(guandao[1].top.x<=100)
+			if(guandao[1].top.x<=95.5)
 			{
-				num=2;
+				num+=1;
 				shuzi.innerHTML=num;
 			}
 			console.log(num)
