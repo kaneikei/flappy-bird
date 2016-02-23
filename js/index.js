@@ -10,11 +10,11 @@ window.onload=function()
 	var ctx=canvas.getContext("2d");
 	var num=0;
 	var shuzi=document.querySelector("#shuzi");
-	shuzi.innerHTML=num;
+	shuzi.innerHTML="得分："+num;
 	//ctx.fillRect(bird.x,bird.y,bird.w,bird.h);
 
 	var a=1;
-	var b=1.5;
+	var b=2;
 
 
 
@@ -27,6 +27,7 @@ window.onload=function()
 		a+=0.04;
 		//b+=0.0001;
 		bird.y+=a*a;
+		//console.log(bird.y);
 		var birdtu=new Image();
 		birdtu.src="images/bird2_2.png";
 		var guandaotu=new Image();
@@ -42,19 +43,18 @@ window.onload=function()
 		{
 			var zhuzi=guandao[i];
 			zhuzi.top.x-=b;
-			//console.log(guandao[0].top.x)
 			zhuzi.bottom.x-=b;
-			if(guandao[0].top.x<=95.5)
+			if(zhuzi.top.x==100)
 			{
-				num+=1;
-				shuzi.innerHTML=num;
+				num=num+1;
+				shuzi.innerHTML="得分："+num;
 			}
-			if(guandao[1].top.x<=95.5)
+			if(num>100)
 			{
-				num+=1;
-				shuzi.innerHTML=num;
+				b=4;
 			}
-			console.log(num)
+			//console.log(zhuzi.top.x)
+			//console.log(num);
 			ctx.drawImage(guandaotu,zhuzi.top.x,zhuzi.top.y,zhuzi.top.w,zhuzi.top.h);
 			ctx.drawImage(guandaotu2,zhuzi.bottom.x,zhuzi.bottom.y,zhuzi.bottom.w,zhuzi.bottom.h);
 			//ctx.fillRect(zhuzi.top.x,zhuzi.top.y,zhuzi.top.w,zhuzi.top.h);
@@ -88,11 +88,15 @@ window.onload=function()
 		{
 			//ctx.fillRect(140,528,bird.w,bird.h);
 			ctx.drawImage(birdtu,140,528,bird.w,bird.h);
+			kaishi.style.display="block";
+			kaishi.innerHTML="重新开始";
 		}
 		else if(bird.y<=0)
 		{
 			//ctx.fillRect(140,0,bird.w,bird.h);
 			ctx.drawImage(birdtu,140,0,bird.w,bird.h);
+			kaishi.style.display="block";
+			kaishi.innerHTML="重新开始";
 		}
 		else
 		{
@@ -102,39 +106,24 @@ window.onload=function()
 		
 		
 	}
-	//draw();
+	
 
 	var qq=false;
 	var kaishi=document.querySelector("#start");
 	kaishi.onclick=function()
 	{
+		a=1;
+		b=2;
+		num=0;
+		shuzi.innerHTML="得分："+num;
+		bird={x:140,y:264,w:40,h:40};
+		guandao[0].top.x=300;
+		guandao[0].bottom.x=300;
+		guandao[1].top.x=520;
+		guandao[1].bottom.x=520;
+		kaishi.style.display="none";
+		requestAnimationFrame(draw);
 		
-		if(qq)
-		{
-			bird={x:140,y:264,w:40,h:40};
-			guandao[0].top.x=300;
-			guandao[0].bottom.x=300;
-			guandao[1].top.x=520;
-			guandao[1].bottom.x=520;
-			a=1;
-			b=1.5;
-			kaishi.style.display="none";
-			requestAnimationFrame(draw);
-			qq=false;
-		}
-		if(!qq)
-		{	
-			bird={x:140,y:264,w:40,h:40};
-			guandao[0].top.x=300;
-			guandao[0].bottom.x=300;
-			guandao[1].top.x=520;
-			guandao[1].bottom.x=520;
-			a=1;
-			b=1.5;
-			kaishi.style.display="none";
-			requestAnimationFrame(draw);
-			qq=true;
-		}
 		
 
 	}
@@ -165,6 +154,9 @@ window.onload=function()
 	};
 
 	
+	  
+
+	//适应手机的  有问题
 	  var upspeed  = 30;
 
 	canvas.addEventListener('click',function(e){
@@ -173,6 +165,25 @@ window.onload=function()
 	  canvas.addEventListener('touchend',function(e){
 	    bird.y -= upspeed;
 	  },false);
+
+	  
+
+
+
+	  document.onmousedown=function(ev)
+	  {
+	  	if (ev.preventDefault)
+		{
+			ev.preventDefault(); //阻止默认浏览器动作(W3C)
+		}
+		else
+		{
+			ev.returnValue=false;//IE中阻止函数器默认动作的方式
+		}
+	  	
+	  }
+	  
+
 
 
 	  
