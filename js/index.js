@@ -10,8 +10,11 @@ window.onload=function()
 	var ctx=canvas.getContext("2d");
 	var num=0;
 	var shuzi=document.querySelector("#shuzi");
+	var guanbi=document.querySelector("#guanbi");
 	shuzi.innerHTML="得分："+num;
 	//ctx.fillRect(bird.x,bird.y,bird.w,bird.h);
+	var audio=document.querySelector("audio");
+
 
 	var a=1;
 	var b=2;
@@ -29,11 +32,11 @@ window.onload=function()
 		bird.y+=a*a;
 		//console.log(bird.y);
 		var birdtu=new Image();
-		birdtu.src="images/bird2_2.png";
+		birdtu.src="images/ming.png";
 		var guandaotu=new Image();
-		guandaotu.src="images/pipe_down.png";
+		guandaotu.src="images/shu.png";
 		var guandaotu2=new Image();
-		guandaotu2.src="images/pipe_up.png";
+		guandaotu2.src="images/shu.png";
 		ctx.drawImage(birdtu,bird.x,bird.y,bird.w,bird.h);
 		
 		//画管道
@@ -90,6 +93,7 @@ window.onload=function()
 			ctx.drawImage(birdtu,140,528,bird.w,bird.h);
 			kaishi.style.display="block";
 			kaishi.innerHTML="重新开始";
+			//audio.src="";
 		}
 		else if(bird.y<=0)
 		{
@@ -97,6 +101,7 @@ window.onload=function()
 			ctx.drawImage(birdtu,140,0,bird.w,bird.h);
 			kaishi.style.display="block";
 			kaishi.innerHTML="重新开始";
+			//audio.src="";
 		}
 		else
 		{
@@ -107,8 +112,26 @@ window.onload=function()
 		
 	}
 	
+	var kongbo=true;
+	guanbi.onclick=function()
+	{	
+		
+		if(kongbo)
+		{	
+			audio.pause();
+			guanbi.innerHTML="开启声音";
+			kongbo=false;
+		}
+		else if(!kongbo)
+		{
+			guanbi.innerHTML="关闭声音";
+			audio.play();
+			kongbo=true;
+		}
+		
+	}
 
-	var qq=false;
+	var qq=true;
 	var kaishi=document.querySelector("#start");
 	kaishi.onclick=function()
 	{
@@ -116,6 +139,7 @@ window.onload=function()
 		b=2;
 		num=0;
 		shuzi.innerHTML="得分："+num;
+		
 		bird={x:140,y:264,w:40,h:40};
 		guandao[0].top.x=300;
 		guandao[0].bottom.x=300;
@@ -123,6 +147,10 @@ window.onload=function()
 		guandao[1].bottom.x=520;
 		kaishi.style.display="none";
 		requestAnimationFrame(draw);
+		audio.src="1.mp3";
+		audio.play();
+		guanbi.innerHTML="关闭声音";
+			kongbo=true
 		
 		
 
@@ -148,6 +176,10 @@ window.onload=function()
 	  }
 	  kaishi.style.display="block";
 	  kaishi.innerHTML="重新开始";
+	  guanbi.innerHTML="关闭声音";
+	 			//audio.play();
+	 			kongbo=true;
+	 // audio.src="";
 	  cancelAnimationFrame(draw);
 	  return true;
 
