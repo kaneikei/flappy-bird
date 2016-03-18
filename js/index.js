@@ -188,8 +188,8 @@ window.onload=function()
 	
 	  
 
-	//适应手机的  有问题
-	  var upspeed  = 30;
+	//适应手机的  
+	  var upspeed  = 10;
 
 	canvas.addEventListener('click',function(e){
 	    bird.y -= upspeed;
